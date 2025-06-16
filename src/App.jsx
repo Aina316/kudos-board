@@ -1,14 +1,14 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import BoardList from "./components/BoardList";
-
-const [onModal, setOnModal] = useState(false);
-
-const toggleForm = () => {
-  setOnModal(!onModal);
-};
+import Modal from "./components/Modal";
 
 function App() {
+  const [onModal, setOnModal] = useState(false);
+
+  const toggleForm = () => {
+    setOnModal((prev) => !prev);
+  };
   return (
     <div className="App">
       <header className="banner">
@@ -31,7 +31,8 @@ function App() {
         <button>inspiration</button>
       </div>
       <div className="create-btn">
-        <button>Create New Board</button>
+        <button onClick={toggleForm}>Create New Board</button>
+        {onModal && <Modal onClose={toggleForm} />}
       </div>
 
       <main className="board-list-component">

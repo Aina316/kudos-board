@@ -11,14 +11,44 @@
 }
 
 .new-board {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   box-shadow: 0 4px 8px #0000001a;
   left: 50%;
   max-width: 400px;
   padding: 20px;
+  gap: 10px;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   z-index: 1000;
+}
+.new-board label {
+  text-align: left;
+}
+
+.new-board input {
+  height: 40px;
+}
+
+.new-board select {
+  height: 40px;
+}
+
+.new-board button {
+  background-color: #3f318e;
+  color: white;
+}
+.close-btn {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }

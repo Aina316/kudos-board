@@ -1,6 +1,5 @@
 import "../style/Modal.css";
-
-const Modal = () => {
+const Modal = ({ onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="new-board" onClick={(e) => e.stopPropagation()}>
@@ -24,3 +23,5 @@ const Modal = () => {
     </div>
   );
 };
+
+export default Modal;
