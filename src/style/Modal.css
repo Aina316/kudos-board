@@ -1,0 +1,24 @@
+.modal-overlay {
+  align-items: center;
+  background: #00000080;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.new-board {
+  background-color: #fff;
+  box-shadow: 0 4px 8px #0000001a;
+  left: 50%;
+  max-width: 400px;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 1000;
+}

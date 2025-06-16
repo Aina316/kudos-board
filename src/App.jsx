@@ -1,4 +1,13 @@
+import { useState } from "react";
 import "./App.css";
+import BoardList from "./components/BoardList";
+
+const [onModal, setOnModal] = useState(false);
+
+const toggleForm = () => {
+  setOnModal(!onModal);
+};
+
 function App() {
   return (
     <div className="App">
@@ -21,9 +30,17 @@ function App() {
         <button>Thank you</button>
         <button>inspiration</button>
       </div>
-      <div>
+      <div className="create-btn">
         <button>Create New Board</button>
       </div>
+
+      <main className="board-list-component">
+        <BoardList />
+      </main>
+
+      <footer className="app-footer">
+        <b>Copyright &copy; 2025 | All Rights Reserved</b>
+      </footer>
     </div>
   );
 }
