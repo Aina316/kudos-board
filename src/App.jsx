@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import Boarddata from "./data/data.js";
 import BoardList from "./components/BoardList";
-import Modal from "./components/Modal";
-
 function App() {
-  const [onModal, setOnModal] = useState(false);
+  const [boards, setBoards] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [query, setQuery] = useState("");
 
-  const toggleForm = () => {
-    setOnModal((prev) => !prev);
+  const loadBoards = async (isNewSearch = false) => {
+    try {
+      const data = Boarddata;
+      const filteredData = data;
+
+      setBoards((prevBoards) =>
+        isNewSearch ? filteredData : [...prevBoards, ...filteredData]
+      );
+    } catch (err) {
+      console.error("Failed to fetch Boards:", err);
+      setBoards([]);
+    } finally {
+    }
   };
+  const searchBoards = () => {
+    if (searchInput.trim()) {
+      setQuery(searchInput.trim());
+    }
+  };
+  const clearSearch = () => {
+    setSearchInput("");
+    setQuery("");
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      searchBoards();
+    }
+  };
+
+  useEffect(() => {
+    loadBoards(true);
+  }, [query]);
+
   return (
     <div className="App">
-      <header className="banner">
-        <img src="/src/assets/images/kudoboard_logo.jpg" alt="Kudoboard Logo" />
-      </header>
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Search Boards..."
-          className="search-bar"
-        />
-        <button>Search</button>
-        <button>Clear</button>
-      </div>
-      <div className="tags">
-        <button>All</button>
-        <button>Recent</button>
-        <button>Celebration</button>
-        <button>Thank you</button>
-        <button>inspiration</button>
-      </div>
-      <div className="create-btn">
-        <button onClick={toggleForm}>Create New Board</button>
-        {onModal && <Modal onClose={toggleForm} />}
-      </div>
-
+      <Header />
       <main className="board-list-component">
-        <BoardList />
+        <BoardList boards={boards} />
       </main>
-
-      <footer className="app-footer">
-        <b>Copyright &copy; 2025 | All Rights Reserved</b>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import Board from "./Board";
 import "../style/BoardList.css";
-const BoardList = ({ card }) => {
+const BoardList = ({ boards }) => {
+  if (!boards || boards.length === 0) {
+    return <p>No Boards Added</p>;
+  }
   return (
     <div className="board-list">
-      <Board />
-      <Board />
-      <Board />
-      <Board />
-      <Board />
+      {boards.map((board) => (
+        <Board key={board.id} board={board} />
+      ))}
     </div>
   );
 };

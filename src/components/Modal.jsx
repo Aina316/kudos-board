@@ -1,5 +1,37 @@
 import "../style/Modal.css";
-const Modal = ({ onClose }) => {
+import React, { useState } from "react";
+const Modal = ({ creatBoard, onClose }) => {
+  const [newBoardTitle, setNewBoardTitle] = useState("");
+  const [newBoardCategory, setNewBoardCategory] = useState("");
+  const [newBoardAuthor, setNewBoardAuthor] = useState("");
+  const createNewBoard = async () => {
+    try {
+      if (!newBoardTitle || !newBoardCategory) {
+        alert("Please fill out the Title and Category fields");
+        return;
+      }
+
+      await axios.post(
+        "https://site-kudos-board-exemplar-backend.onrender.com/boards",
+        {
+          title: newBoardTitle,
+          category: newBoardCategory,
+          owner: newBoardAuthor || "Anonymous",
+        }
+      );
+
+      onSuccess();
+
+      setNewBoardTitle("");
+      setNewBoardCategory("");
+      setNewBoardAuthor("");
+
+      onClose();
+    } catch (error) {
+      console.error("Error creating a new board:", error);
+    }
+  }; // Pr
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="new-board" onClick={(e) => e.stopPropagation()}>
