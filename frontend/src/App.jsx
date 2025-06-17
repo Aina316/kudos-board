@@ -3,7 +3,6 @@ import "./App.css";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Boarddata from "./data/data.js";
-import BoardList from "./components/BoardList.jsx";
 import Modal from "./components/Modal.jsx";
 
 function App() {
@@ -12,19 +11,25 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [query, setQuery] = useState("");
 
-  const loadBoards = async (isNewSearch = false) => {
-    try {
-      const data = Boarddata;
-      const filteredData = data;
+  const loadBoards = () => {
+    let filteredBoards = Boarddata;
 
-      setBoards((prevBoards) =>
-        isNewSearch ? filteredData : [...prevBoards, ...filteredData]
-      );
-    } catch (err) {
-      console.error("Failed to fetch Boards:", err);
-      setBoards([]);
-    } finally {
-    }
+    return filteredBoards.map((board) => (
+      <div key={board.id} className="board-component">
+        <img src={board.Image} alt={board.title} />
+        <h3>{board.title}</h3>
+        <p>{board.category}</p>
+        <div className="view-delete-btn">
+          <button>View Board</button>
+          <button
+            className="delete-btn"
+            onClick={() => deleteBoard(board.board_id)}
+          >
+            Delete Board
+          </button>
+        </div>
+      </div>
+    ));
   };
   const searchBoards = () => {
     if (searchInput.trim()) {
@@ -42,15 +47,15 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    loadBoards(true);
-  }, [query]);
+  // useEffect(() => {
+  //   loadBoards(true);
+  // }, [query]);
 
-  const handleCreateSuccess = () => {
-    setBoards([]);
-    loadBoards();
-    setOnModal(false);
-  };
+  // const handleCreateSuccess = () => {
+  //   setBoards([]);
+  //   loadBoards();
+  //   setOnModal(false);
+  // };
   const toggleForm = () => {
     setOnModal((prev) => !prev);
   };
@@ -80,7 +85,7 @@ function App() {
         )}
       </div>
       <main className="board-list-component">
-        <BoardList boards={boards} />
+        <section className="board-list">{loadBoards()}</section>
       </main>
       <Footer />
     </div>
