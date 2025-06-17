@@ -6,6 +6,7 @@ const Modal = ({ createBoard, onClose }) => {
   const [newBoardTitle, setNewBoardTitle] = useState("");
   const [newBoardCategory, setNewBoardCategory] = useState("");
   const [newBoardAuthor, setNewBoardAuthor] = useState("");
+
   const createNewBoard = async () => {
     try {
       if (!newBoardTitle || !newBoardCategory) {

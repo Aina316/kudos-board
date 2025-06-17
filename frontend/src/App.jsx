@@ -3,8 +3,8 @@ import "./App.css";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Boarddata from "./data/data.js";
-import BoardList from "./components/BoardList";
-import Modal from "./components/Modal";
+import BoardList from "./components/BoardList.jsx";
+import Modal from "./components/Modal.jsx";
 
 function App() {
   const [onModal, setOnModal] = useState(false);

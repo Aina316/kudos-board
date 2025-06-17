@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Modal from "../components/Modal";
 
 const Header = () => {
   return (
