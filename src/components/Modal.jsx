@@ -1,6 +1,8 @@
 import "../style/Modal.css";
 import React, { useState } from "react";
-const Modal = ({ creatBoard, onClose }) => {
+import Boarddata from "../data/data.js";
+
+const Modal = ({ createBoard, onClose }) => {
   const [newBoardTitle, setNewBoardTitle] = useState("");
   const [newBoardCategory, setNewBoardCategory] = useState("");
   const [newBoardAuthor, setNewBoardAuthor] = useState("");
@@ -11,16 +13,17 @@ const Modal = ({ creatBoard, onClose }) => {
         return;
       }
 
-      await axios.post(
-        "https://site-kudos-board-exemplar-backend.onrender.com/boards",
-        {
-          title: newBoardTitle,
-          category: newBoardCategory,
-          owner: newBoardAuthor || "Anonymous",
-        }
-      );
+      const data = Boarddata;
+      Boarddata.push({
+        id: Boarddata.length + 1,
+        title: newBoardTitle,
+        category: newBoardCategory,
+        Image: "/src/assets/images/background.jpeg",
+        Author: newBoardAuthor,
+        cards: [],
+      });
 
-      onSuccess();
+      createBoard();
 
       setNewBoardTitle("");
       setNewBoardCategory("");
@@ -30,7 +33,7 @@ const Modal = ({ creatBoard, onClose }) => {
     } catch (error) {
       console.error("Error creating a new board:", error);
     }
-  }; // Pr
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -40,17 +43,32 @@ const Modal = ({ creatBoard, onClose }) => {
         </button>
         <h2>Create a New Board</h2>
         <label>Title</label>
-        <input type="text" required />
+        <input
+          type="text"
+          value={newBoardTitle}
+          onChange={(e) => setNewBoardTitle(e.target.value)}
+          required
+        />
         <label>Category</label>
-        <select required>
+        <select
+          value={newBoardCategory}
+          onChange={(e) => setNewBoardCategory(e.target.value)}
+          required
+        >
           <option value="">Select a category</option>
           <option value="Celebration">Celebration</option>
           <option value="Thank You">Thank You</option>
           <option value="Inspiration">Inspiration</option>
         </select>
         <label>Author</label>
-        <input type="text" />
-        <button type="submit">Create Board</button>
+        <input
+          type="text"
+          value={newBoardAuthor}
+          onChange={(e) => setNewBoardAuthor(e.target.value)}
+        />
+        <button type="submit" onClick={createNewBoard}>
+          Create Board
+        </button>
       </div>
     </div>
   );
