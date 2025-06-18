@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
   } else {
     res.status(404).send("Boards not found");
   }
+  console.log(boards);
   res.json(boards);
 });
 

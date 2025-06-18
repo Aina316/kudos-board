@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -14,13 +14,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Boards {
+model boards {
   id        Int      @id @default(autoincrement())
   title     String
   image     String
-  category    String
+  category   String
   author    String
-  cards     Card[]
+  cards      Card[]
+}
+ model Card{
+  id Int @id @default(autoincrement())
+  board boards @relation(fields: [boardId], references: [id])
+  boardId Int
 }
 
 
@@ -32,3 +37,4 @@ image      String
 owner  Boards @relation(fields: [ownerId], references: [id])
 ownerId Int
 }
+
