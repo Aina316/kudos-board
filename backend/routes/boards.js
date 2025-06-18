@@ -19,13 +19,14 @@ router.get("/:boardId", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, category, author, image } = req.body;
+  const { title, category, author, image, cards } = req.body;
   const newBoard = await prisma.boards.create({
     data: {
       title,
       category,
       author,
       image,
+      cards,
     },
   });
   res.json(newBoard);
