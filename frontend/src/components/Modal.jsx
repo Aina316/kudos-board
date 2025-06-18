@@ -1,7 +1,6 @@
 import "../style/Modal.css";
 import React, { useState } from "react";
 import Boarddata from "../data/data.js";
-
 const Modal = ({ createBoard, onClose }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -16,34 +15,7 @@ const Modal = ({ createBoard, onClose }) => {
       [name]: value,
     }));
   };
-  // const createNewBoard = async () => {
-  //   try {
-  //     if (!newBoardTitle || !newBoardCategory) {
-  //       alert("Please fill out the Title and Category fields");
-  //       return;
-  //     }
 
-  //     const data = Boarddata;
-  //     Boarddata.push({
-  //       id: data.length + 1,
-  //       title: newBoardTitle,
-  //       category: newBoardCategory,
-  //       Image: "/src/assets/images/background.jpeg",
-  //       Author: newBoardAuthor,
-  //       cards: [],
-  //     });
-
-  //     createBoard();
-
-  //     setNewBoardTitle("");
-  //     setNewBoardCategory("");
-  //     setNewBoardAuthor("");
-
-  //     onClose();
-  //   } catch (error) {
-  //     console.error("Error creating a new board:", error);
-  //   }
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -59,7 +31,7 @@ const Modal = ({ createBoard, onClose }) => {
           return response.json();
         }
 
-        throw new Error("Failed to add pet.");
+        throw new Error("Failed to add board.");
       })
       .then((data) => {
         console.log("Success:", data);
@@ -81,6 +53,14 @@ const Modal = ({ createBoard, onClose }) => {
           type="text"
           name="title"
           value={FormData.title}
+          onChange={handleChange}
+          required
+        />
+        <label>Image</label>
+        <input
+          type="text"
+          name="image"
+          value={FormData.image}
           onChange={handleChange}
           required
         />

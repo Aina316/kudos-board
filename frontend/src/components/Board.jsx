@@ -1,5 +1,13 @@
 import "../App.css";
-const Board = ({ title, image, category, author }) => {
+const Board = ({ id, title, image, category, author, onDelete }) => {
+  const deleteBoard = () => {
+    fetch(`http://localhost:3000/boards/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (!res.ok) throw new Error("Delete failed");
+      onDelete();
+    });
+  };
   return (
     <div className="board-card">
       <img src={image} alt={title} className="board-image" />
@@ -12,10 +20,7 @@ const Board = ({ title, image, category, author }) => {
       </p>
       <div className="view-delete-btn">
         <button>View Board</button>
-        <button
-          className="delete-btn"
-          onClick={() => deleteBoard(board.board_id)}
-        >
+        <button className="delete-btn" onClick={deleteBoard}>
           Delete Board
         </button>
       </div>
