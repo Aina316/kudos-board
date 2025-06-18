@@ -16,7 +16,7 @@ const Modal = ({ createBoard, onClose }) => {
 
       const data = Boarddata;
       Boarddata.push({
-        id: Boarddata.length + 1,
+        id: data.length + 1,
         title: newBoardTitle,
         category: newBoardCategory,
         Image: "/src/assets/images/background.jpeg",

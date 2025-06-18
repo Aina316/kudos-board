@@ -10,6 +10,13 @@ function App() {
   const [boards, setBoards] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [query, setQuery] = useState("");
+  const deleteBoard = async (boardId) => {
+    setBoards((prevBoards) =>
+      prevBoards.filter((board) => board.id !== boardId)
+    );
+    loadBoards();
+    console.log("23456", Boarddata);
+  };
 
   const loadBoards = () => {
     let filteredBoards = Boarddata;
@@ -51,11 +58,10 @@ function App() {
   //   loadBoards(true);
   // }, [query]);
 
-  // const handleCreateSuccess = () => {
-  //   setBoards([]);
-  //   loadBoards();
-  //   setOnModal(false);
-  // };
+  const handleCreateSuccess = () => {
+    setOnModal(false);
+    loadBoards();
+  };
   const toggleForm = () => {
     setOnModal((prev) => !prev);
   };
