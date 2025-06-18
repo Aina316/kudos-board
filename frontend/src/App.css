@@ -45,8 +45,12 @@ button:hover {
   height: 40px;
   padding: 10px;
 }
-
-.search-box button {
+.search-box-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.search-box-button button {
   background-color: #3f318e;
   align-items: center;
   border: none;
