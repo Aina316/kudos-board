@@ -5,6 +5,11 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const boards = await prisma.boards.findMany();
+  if (boards) {
+    console.log(boards);
+  } else {
+    res.status(404).send("Boards not found");
+  }
   console.log(boards);
   res.json(boards);
 });
@@ -20,8 +25,10 @@ router.get("/:boardId", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { title, image, category, author } = req.body;
+  const boards = await prisma.boards.findMany();
   const newBoard = await prisma.boards.create({
     data: {
+      id: boards.length + 1,
       title,
       image,
       category,

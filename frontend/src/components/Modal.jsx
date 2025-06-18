@@ -3,39 +3,72 @@ import React, { useState } from "react";
 import Boarddata from "../data/data.js";
 
 const Modal = ({ createBoard, onClose }) => {
-  const [newBoardTitle, setNewBoardTitle] = useState("");
-  const [newBoardCategory, setNewBoardCategory] = useState("");
-  const [newBoardAuthor, setNewBoardAuthor] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "",
+    image: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  const createNewBoard = async () => {
-    try {
-      if (!newBoardTitle || !newBoardCategory) {
-        alert("Please fill out the Title and Category fields");
-        return;
-      }
-
-      const data = Boarddata;
-      Boarddata.push({
-        id: data.length + 1,
-        title: newBoardTitle,
-        category: newBoardCategory,
-        Image: "/src/assets/images/background.jpeg",
-        Author: newBoardAuthor,
-        cards: [],
-      });
-
-      createBoard();
-
-      setNewBoardTitle("");
-      setNewBoardCategory("");
-      setNewBoardAuthor("");
-
-      onClose();
-    } catch (error) {
-      console.error("Error creating a new board:", error);
-    }
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
+  // const createNewBoard = async () => {
+  //   try {
+  //     if (!newBoardTitle || !newBoardCategory) {
+  //       alert("Please fill out the Title and Category fields");
+  //       return;
+  //     }
 
+  //     const data = Boarddata;
+  //     Boarddata.push({
+  //       id: data.length + 1,
+  //       title: newBoardTitle,
+  //       category: newBoardCategory,
+  //       Image: "/src/assets/images/background.jpeg",
+  //       Author: newBoardAuthor,
+  //       cards: [],
+  //     });
+
+  //     createBoard();
+
+  //     setNewBoardTitle("");
+  //     setNewBoardCategory("");
+  //     setNewBoardAuthor("");
+
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("Error creating a new board:", error);
+  //   }
+  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch("http://localhost:3000/boards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error("Failed to add pet.");
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        createBoard();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="new-board" onClick={(e) => e.stopPropagation()}>
@@ -46,14 +79,16 @@ const Modal = ({ createBoard, onClose }) => {
         <label>Title</label>
         <input
           type="text"
-          value={newBoardTitle}
-          onChange={(e) => setNewBoardTitle(e.target.value)}
+          name="title"
+          value={FormData.title}
+          onChange={handleChange}
           required
         />
         <label>Category</label>
         <select
-          value={newBoardCategory}
-          onChange={(e) => setNewBoardCategory(e.target.value)}
+          value={formData.category}
+          name="category"
+          onChange={handleChange}
           required
         >
           <option value="">Select a category</option>
@@ -64,10 +99,12 @@ const Modal = ({ createBoard, onClose }) => {
         <label>Author</label>
         <input
           type="text"
-          value={newBoardAuthor}
-          onChange={(e) => setNewBoardAuthor(e.target.value)}
+          name="author"
+          value={FormData.author}
+          onChange={handleChange}
+          required
         />
-        <button type="submit" onClick={createNewBoard}>
+        <button type="submit" onClick={handleSubmit}>
           Create Board
         </button>
       </div>

@@ -29,4 +29,12 @@ model boards {
 }
 
 
+model Card{
+id        Int      @id @default(autoincrement())
+title   String
+description String
+image      String
+owner  Boards @relation(fields: [ownerId], references: [id])
+ownerId Int
+}
 
