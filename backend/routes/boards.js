@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const boards = await prisma.boards.findMany();
-  console.log(pets);
+  console.log(boards);
   res.json(boards);
 });
 
@@ -19,14 +19,24 @@ router.get("/:boardId", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, category, author, image } = req.body;
+  const { title, image, category, author } = req.body;
   const newBoard = await prisma.boards.create({
     data: {
       title,
+      image,
       category,
       author,
-      image,
     },
   });
   res.json(newBoard);
 });
+
+router.delete("/:boardId", async (req, res) => {
+  const boardId = parseInt(req.params.boardId);
+
+  await prisma.boards.delete({
+    where: { id: boardId },
+  });
+  res.json({ message: `Board ${boardId} deleted!` });
+});
+module.exports = router;

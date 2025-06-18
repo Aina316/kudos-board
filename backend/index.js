@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const PORT = 3000;
+const routes = require("./routes/boards");
+
+app.use(express.json());
+app.use("/boards", routes);
 
 app.get("/", (req, res) => {
   res.send(`
