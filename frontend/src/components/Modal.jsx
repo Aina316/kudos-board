@@ -1,6 +1,5 @@
 import "../style/Modal.css";
-import React, { useState } from "react";
-import Boarddata from "../data/data.js";
+import { useState } from "react";
 const Modal = ({ createBoard, onClose }) => {
   const [formData, setFormData] = useState({
     title: "",
