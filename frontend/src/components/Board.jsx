@@ -1,4 +1,7 @@
 import "../App.css";
+import React from "react";
+import { Link } from "react-router-dom";
+
 const Board = ({ id, title, image, category, author, onDelete }) => {
   const deleteBoard = () => {
     fetch(`http://localhost:3000/boards/${id}`, {
@@ -19,7 +22,11 @@ const Board = ({ id, title, image, category, author, onDelete }) => {
         <strong>Author:</strong> {author}
       </p>
       <div className="view-delete-btn">
-        <button>View Board</button>
+        <button>
+          <Link to={`/boards/${id}`} className="view-board">
+            View Board
+          </Link>{" "}
+        </button>
         <button className="delete-btn" onClick={deleteBoard}>
           Delete Board
         </button>

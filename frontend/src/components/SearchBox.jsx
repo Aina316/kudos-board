@@ -1,7 +1,34 @@
 import "../App.css";
-const SearchBox = ({ setFilter }) => {
+const SearchBox = ({
+  setFilter,
+  setSearchInput,
+  inputValue,
+  setInputValue,
+}) => {
   const handleFilter = (type, category = "") => {
     setFilter({ type, category });
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setSearchInput(inputValue);
+
+    setFilter({ type: "search" });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleClear = () => {
+    setInputValue("");
+    setSearchInput("");
+    setFilter({ type: "all" });
   };
 
   return (
@@ -12,11 +39,13 @@ const SearchBox = ({ setFilter }) => {
             type="text"
             placeholder="Search Boards..."
             className="search-bar"
-            // Future: onChange to support keyword search
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
           />
           <div className="search-box-button">
-            <button>Search</button>
-            <button onClick={() => handleFilter("all")}>Clear</button>
+            <button onClick={handleSearch}>Search</button>
+            <button onClick={handleClear}>Clear</button>
           </div>
         </div>
       </div>
@@ -28,7 +57,7 @@ const SearchBox = ({ setFilter }) => {
           Celebration
         </button>
         <button onClick={() => handleFilter("category", "Thank You")}>
-          Thank you
+          Thank You
         </button>
         <button onClick={() => handleFilter("category", "Inspiration")}>
           Inspiration
