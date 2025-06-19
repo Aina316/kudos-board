@@ -22,11 +22,7 @@ model boards {
   author    String
   cards      Card[]
 }
- model Card{
-  id Int @id @default(autoincrement())
-  board boards @relation(fields: [boardId], references: [id])
-  boardId Int
-}
+
 
 
 model Card{
@@ -34,7 +30,7 @@ id        Int      @id @default(autoincrement())
 title   String
 description String
 image      String
-owner  Boards @relation(fields: [ownerId], references: [id])
+owner  boards @relation(fields: [ownerId], references: [id])
 ownerId Int
 }
 
