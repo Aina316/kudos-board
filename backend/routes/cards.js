@@ -12,8 +12,9 @@ router.get("/:boardId", async (req, res) => {
 });
 
 router.post("/:boardId", async (req, res) => {
-  const { title, description, gif, owner } = req.body;
+  const { title, description, gif } = req.body;
   const boardId = parseInt(req.params.boardId);
+  const cards = await prisma.card.findMany();
 
   const card = await prisma.card.create({
     data: {
@@ -26,22 +27,7 @@ router.post("/:boardId", async (req, res) => {
   res.status(202).json(card);
 });
 
-router.put("./:cardId", async (req, res) => {
-  const cardId = parseInt(req.params.cardId);
-  const { title, description, gif, owner } = req.body;
-  const updatedCard = await prisma.card.update({
-    where: { id: cardId },
-    data: {
-      title,
-      description,
-      gif,
-      owner,
-    },
-  });
-  res.json(updatedCard);
-});
-
-router.delete("./:cardId", async (req, res) => {
+router.delete("/:cardId", async (req, res) => {
   const cardId = parseInt(req.params.cardId);
   await prisma.card.delete({
     where: { id: cardId },

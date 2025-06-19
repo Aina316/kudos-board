@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
+import axios from "axios";
 const NewCardForm = ({ boardId, onSuccess, onClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -9,7 +9,7 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
   const [gifOptions, setGifOptions] = useState([]);
   const [selectedGifUrl, setSelectedGifUrl] = useState("");
 
-  const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
+  const apiKey = import.meta.env.VITE_GIPHY_API_KEY;
 
   const searchGifs = async () => {
     try {
@@ -46,12 +46,11 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
         return;
       }
       const response = await axios.post(
-        `http://localhost:3000/boards/${boardId}/cards`,
+        `http://localhost:3000/cards/${boardId}`,
         {
           title,
           description,
-          gif,
-          owner,
+          gif: selectedGifUrl,
         }
       );
 

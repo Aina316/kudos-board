@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Board from "./Board";
 const BoardList = ({ boards, onDelete }) => {
   console.log("4", boards);

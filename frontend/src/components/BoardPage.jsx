@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
 import Header from "./Header";
 import NewCardForm from "./NewCardForm";
-
+import Card from "./Card";
 const BoardPage = () => {
   const { boardId } = useParams();
   const [boardTitle, setBoardTitle] = useState("");
@@ -19,9 +19,10 @@ const BoardPage = () => {
   const fetchCards = async () => {
     try {
       const response = await axios.get(
-        `"http://localhost:3000/boards/${boardId}/cards`
+        `http://localhost:3000/cards/${boardId}`
       );
-      setCards(response.data.cards);
+      console.log("2025", response.data);
+      setCards(response.data);
     } catch (error) {
       console.error("Error fetching cards:", error);
     }
@@ -32,7 +33,7 @@ const BoardPage = () => {
       const response = await axios.get(
         `http://localhost:3000/boards/${boardId}`
       );
-      const title = response.data.board.title;
+      const title = response.data.title;
       setBoardTitle(title);
     } catch (error) {
       console.error("Error fetching board data:", error);
@@ -41,7 +42,8 @@ const BoardPage = () => {
 
   const handleDelete = async (cardId) => {
     try {
-      await axios.delete(`http://localhost:3000/boards/${boardId}/cards`);
+      console.log("Deleting card with ID: ", cardId);
+      await axios.delete(`http://localhost:3000/cards/${cardId}`);
       fetchCards();
     } catch (error) {
       console.error("Error deleting card:", error);
@@ -53,8 +55,8 @@ const BoardPage = () => {
   };
 
   const handleCreateSuccess = (newCard) => {
-    if (newCard && newCard.card_id) {
-      setCards([...cards, newCard]);
+    if (newCard && newCard.id) {
+      fetchCards();
       setShowForm(false);
     } else {
       console.error("Invalid card data received:", newCard);
@@ -81,17 +83,13 @@ const BoardPage = () => {
         )}
       </div>
 
-      {/* <div className="card-list">
+      <div className="card-list">
         {cards.map((card) => (
-          <div className="card-preview">
-            <Card
-              key={card.card_id}
-              card={card}
-              onDelete={() => handleDelete(card.card_id)}
-            />
+          <div key={card.id} className="card-preview">
+            <Card card={card} onDelete={handleDelete} />
           </div>
         ))}
-      </div> */}
+      </div>
       <Footer />
     </div>
   );
