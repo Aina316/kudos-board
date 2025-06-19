@@ -32,7 +32,7 @@ const BoardPage = () => {
       const response = await axios.get(
         `http://localhost:3000/boards/${boardId}`
       );
-      const title = response.board.title;
+      const title = response.data.board.title;
       setBoardTitle(title);
     } catch (error) {
       console.error("Error fetching board data:", error);

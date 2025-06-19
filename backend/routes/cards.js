@@ -12,16 +12,15 @@ router.get("/:boardId", async (req, res) => {
 });
 
 router.post("/:boardId", async (req, res) => {
-  const { title, description, image, owner } = req.body;
+  const { title, description, gif, owner } = req.body;
   const boardId = parseInt(req.params.boardId);
 
   const card = await prisma.card.create({
     data: {
       title,
       description,
-      image,
-      owner,
-      boardId,
+      gif,
+      board: { connect: { id: boardId } },
     },
   });
   res.status(202).json(card);
@@ -29,13 +28,13 @@ router.post("/:boardId", async (req, res) => {
 
 router.put("./:cardId", async (req, res) => {
   const cardId = parseInt(req.params.cardId);
-  const { title, description, image, owner } = req.body;
+  const { title, description, gif, owner } = req.body;
   const updatedCard = await prisma.card.update({
     where: { id: cardId },
     data: {
       title,
       description,
-      image,
+      gif,
       owner,
     },
   });

@@ -29,8 +29,8 @@ model Card{
 id        Int      @id @default(autoincrement())
 title   String
 description String
-image      String
-owner  boards @relation(fields: [ownerId], references: [id])
-ownerId Int
+gif      String
+board  boards @relation(fields: [boardId], references: [id])
+boardId Int
 }
 
