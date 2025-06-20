@@ -36,6 +36,7 @@ router.delete("/:cardId", async (req, res) => {
 });
 
 module.exports = router;
+
 router.patch("/:cardId/votes", async (req, res) => {
   const cardId = parseInt(req.params.cardId);
   try {

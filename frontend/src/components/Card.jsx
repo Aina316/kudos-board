@@ -10,6 +10,7 @@ const Card = ({ card, onDelete }) => {
     try {
       const res = await axios.patch(`http://localhost:3000/cards/${id}/votes`);
 
+
       setVotes(res.data.votes);
     } catch (error) {
       console.error("Error upvoting card:", error);
@@ -34,7 +35,7 @@ const Card = ({ card, onDelete }) => {
       </div>
       {showComment && (
         <Comment card={card} onClose={() => setShowComment(false)} />
-      )}
+      )}      
     </div>
   );
 };

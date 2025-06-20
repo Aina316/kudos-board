@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../App.css";
+
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import SearchBox from "./SearchBox.jsx";
@@ -12,7 +13,7 @@ function HomePage() {
   const [filter, setFilter] = useState({ category: "", type: "All" });
   const [searchInput, setSearchInput] = useState("");
   const [inputValue, setInputValue] = useState("");
-
+  const baseUrl = import.meta.env.VITE_API_URL;
   const filterBoards = () => {
     let filtered = [...boards];
     if (filter.type === "recent") {
@@ -35,7 +36,12 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await fetch("http://localhost:3000/boards");
+      const response = await fetch(
+        "https://kudosboard-7fzn.onrender.com/boards"
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       console.log("Data is here", data);
       setBoards(data);
