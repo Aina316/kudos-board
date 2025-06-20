@@ -72,7 +72,7 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
     <div className="card-overlay">
       <div className="new-card-form">
         <button className="close-btn" onClick={onClose}>
-          X
+          Close
         </button>
         <h2>Create a New Card</h2>
         <input

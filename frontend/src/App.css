@@ -16,6 +16,11 @@ button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
+.header-component {
+  color: white;
+  background-color: #3f318e;
+  font-size: 30px;
+}
 .banner {
   padding: 20px;
 }
@@ -214,7 +219,10 @@ button {
   flex-direction: column;
   align-items: center;
 }
-
+.card-list-board .header-component {
+  width: 100%;
+  text-align: center;
+}
 .card-list-component {
   flex-direction: row;
   justify-content: flex-start;
@@ -228,5 +236,13 @@ button {
 .back-arrow {
   display: flex;
   flex-direction: row;
-  margin-right: 89%;
+  margin-right: 91%;
+}
+
+.back-arrow a {
+  color: gold;
+}
+.card-list-board .app-footer {
+  width: 100%;
+  text-align: center;
 }

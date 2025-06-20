@@ -17,6 +17,8 @@
   box-shadow: 0 4px 8px #0000001a;
   left: 50%;
   max-width: 400px;
+  max-height: 80vh;
+
   padding: 20px;
   gap: 10px;
   position: fixed;

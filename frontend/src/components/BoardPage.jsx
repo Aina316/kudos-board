@@ -69,10 +69,10 @@ const BoardPage = () => {
 
   return (
     <div className="card-list-board">
+      <Header />
       <div className="back-arrow">
         <Link to="/">Back to Home Page</Link>
       </div>
-      <Header />
       <h2> {boardTitle}</h2>
       <div className="center-create-button">
         <button className="create-card-btn" onClick={toggleForm}>

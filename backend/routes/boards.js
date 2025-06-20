@@ -29,7 +29,6 @@ router.post("/", async (req, res) => {
   const boards = await prisma.boards.findMany();
   const newBoard = await prisma.boards.create({
     data: {
-      id: boards.length + 1,
       title,
       image,
       category,

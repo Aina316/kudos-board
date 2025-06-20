@@ -18,12 +18,14 @@ const App = () => {
   return (
     <Router>
       <div>
-        <header className="theme-toggle" style={{ padding: "1rem" }}>
+        <header
+          className="theme-toggle"
+          style={{ padding: "1rem", backgroundColor: "#3f318e" }}
+        >
           <button onClick={() => setDarkMode((prev) => !prev)}>
             Switch to {darkMode ? "Light" : "Dark"} Mode
           </button>
         </header>
-
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/boards/:boardId" element={<BoardPage />} />

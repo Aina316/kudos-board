@@ -35,3 +35,56 @@
   color: white;
   background-color: #3f318e;
 }
+.light-card {
+  background-color: white;
+  color: #3f318e;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 30px;
+  height: 400px;
+  min-width: 150px;
+  width: 400px;
+}
+
+.light-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.light-card p {
+  color: black;
+}
+
+.light-card h3 {
+  color: black;
+}
+
+.dark-card {
+  background-color: #3f318e;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 30px;
+  height: 400px;
+  min-width: 150px;
+  width: 400px;
+}
+
+.dark-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.dark-card p {
+  color: white;
+}
+
+.dark-card h3 {
+  color: white;
+}

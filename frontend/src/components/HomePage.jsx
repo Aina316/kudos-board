@@ -17,7 +17,7 @@ function HomePage() {
     let filtered = [...boards];
     if (filter.type === "recent") {
       filtered = filtered
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .slice(0, 6);
     } else if (filter.type === "category") {
       filtered = filtered.filter(
