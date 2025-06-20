@@ -36,6 +36,9 @@ function HomePage() {
   const fetchBoards = async () => {
     try {
       const response = await fetch(`${baseUrl}/boards`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       console.log("Data is here", data);
       setBoards(data);
