@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "../App.css";
+import axios from "axios";
+
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import SearchBox from "./SearchBox.jsx";
@@ -35,7 +37,7 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await fetch(`${baseUrl}/boards`);
+      const response = await axios.get(`${baseUrl}/boards`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
