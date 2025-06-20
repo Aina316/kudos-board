@@ -37,15 +37,12 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/boards`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("Data is here", data);
-      setBoards(data);
+      const response = await axios.get(
+        "https://kudosboard-7fzn.onrender.com/boards"
+      );
+      setBoards(response.data.boards);
     } catch (error) {
-      console.error("Failed to fetch boards", error);
+      console.error("Error fetching boards:", error);
     }
   };
 
