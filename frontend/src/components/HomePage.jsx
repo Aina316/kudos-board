@@ -12,7 +12,7 @@ function HomePage() {
   const [filter, setFilter] = useState({ category: "", type: "All" });
   const [searchInput, setSearchInput] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
+  const baseUrl = import.meta.env.VITE_API_URL;
   const filterBoards = () => {
     let filtered = [...boards];
     if (filter.type === "recent") {
