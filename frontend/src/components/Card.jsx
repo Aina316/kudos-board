@@ -2,15 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import Comment from "./Comment";
 import "../style/Card.css";
-const Card = ({ card, onDelete, onPin }) => {
-  const { id, title, description, gif, pinned, votes: defaultVotes } = card;
+const Card = ({ card, onDelete }) => {
+  const { id, title, description, gif, votes: defaultVotes } = card;
   const [votes, setVotes] = useState(defaultVotes || 0);
   const [showComment, setShowComment] = useState(false);
   const handleUpvote = async () => {
     try {
-      const res = await axios.patch(
-        `https://kudos-board-4f8j.onrender.com/cards/${id}/votes`
-      );
+      const res = await axios.patch(`http://localhost:3000/cards/${id}/votes`);
 
       setVotes(res.data.votes);
     } catch (error) {
@@ -20,16 +18,12 @@ const Card = ({ card, onDelete, onPin }) => {
   const handleDelete = () => {
     onDelete(id);
   };
-
   return (
-    <div className={`card ${pinned ? "pinned-card" : "card"}`}>
+    <div className="card">
       <h3>{title}</h3>
       <p>{description}</p>
       <img src={gif} alt="GIF" />
       <div className="card-btns">
-        <button onClick={() => onPin(card.id)}>
-          {card.pinned ? "📌 Unpin" : "📍 Pin"}
-        </button>
         <button className="upvote-button" onClick={handleUpvote}>
           Upvote: {votes}
         </button>
