@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "../App.css";
-import axios from "axios";
 
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
@@ -37,12 +36,17 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await axios.get(
+      const response = await fetch(
         "https://kudosboard-7fzn.onrender.com/boards"
       );
-      setBoards(response.data.boards);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Data is here", data);
+      setBoards(data);
     } catch (error) {
-      console.error("Error fetching boards:", error);
+      console.error("Failed to fetch boards", error);
     }
   };
 
