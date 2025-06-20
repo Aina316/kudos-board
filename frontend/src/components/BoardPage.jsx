@@ -5,7 +5,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import NewCardForm from "./NewCardForm";
 import Card from "./Card";
-import "../style/BoardPage.css";
+import "../App.css";
+
 const BoardPage = () => {
   const { boardId } = useParams();
   const [boardTitle, setBoardTitle] = useState("");
@@ -67,10 +68,10 @@ const BoardPage = () => {
   };
 
   return (
-    <div className="card-list">
-      <Link to="/">
-        <span className="back-arrow"></span>
-      </Link>
+    <div className="card-list-board">
+      <div className="back-arrow">
+        <Link to="/">Back to Home Page</Link>
+      </div>
       <Header />
       <h2> {boardTitle}</h2>
       <div className="center-create-button">
@@ -86,7 +87,7 @@ const BoardPage = () => {
         )}
       </div>
 
-      <div className="card-list">
+      <div className="card-list-component">
         {cards.map((card) => (
           <div key={card.id} className="card-preview">
             <Card card={card} onDelete={handleDelete} />

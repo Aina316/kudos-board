@@ -8,7 +8,9 @@ const Card = ({ card, onDelete }) => {
   const [showComment, setShowComment] = useState(false);
   const handleUpvote = async () => {
     try {
-      const res = await axios.patch(`http://localhost:3000/cards/${id}/votes`);
+      const res = await axios.patch(
+        `https://kudos-board-4f8j.onrender.com/cards/${id}/votes`
+      );
 
       setVotes(res.data.votes);
     } catch (error) {

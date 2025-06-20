@@ -14,12 +14,8 @@ const Board = ({ id, title, category, author, onDelete }) => {
     <div className="board-card">
       <img src={image} alt={title} className="board-image" />
       <h3>{title}</h3>
-      <p>
-        <strong>Category:</strong> {category}
-      </p>
-      <p>
-        <strong>Author:</strong> {author}
-      </p>
+      <p>{category}</p>
+      <p>{author}</p>
       <div className="view-delete-btn">
         <button>
           <Link to={`/boards/${id}`} className="view-board">

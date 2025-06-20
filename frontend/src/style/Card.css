@@ -1,20 +1,26 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #3f318e;
-  border-radius: 20px;
-  color: black;
+  background-color: white;
+  color: #3f318e;
   text-align: center;
   overflow: hidden;
+  border: 1px solid black;
+  border-radius: 10px;
   margin: 10px 10px 10px 10px;
   padding: 30px;
+  height: 400px;
+  min-width: 150px;
+  width: 400px;
 }
-
+.card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
 .card-btns {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 10px;
 }
 
