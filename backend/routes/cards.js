@@ -54,3 +54,27 @@ router.patch("/:cardId/votes", async (req, res) => {
     res.status(500).json({ error: "Failed to upvote card" });
   }
 });
+
+router.patch("/pin/:cardId", async (req, res) => {
+  const { cardId } = req.params;
+
+  try {
+    const card = await prisma.card.findUnique({
+      where: { id: Number(cardId) },
+    });
+
+    if (!card) return res.status(404).json({ error: "Card not found" });
+
+    const updated = await prisma.card.update({
+      where: { id: Number(cardId) },
+      data: {
+        pinned: !card.pinned,
+        pinnedAt: !card.pinned ? new Date() : null,
+      },
+    });
+
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to toggle pin" });
+  }
+});

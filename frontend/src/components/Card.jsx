@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import Comment from "./Comment";
 import "../style/Card.css";
-const Card = ({ card, onDelete }) => {
-  const { id, title, description, gif, votes: defaultVotes } = card;
+const Card = ({ card, onDelete, onPin }) => {
+  const { id, title, description, gif, pinned, votes: defaultVotes } = card;
   const [votes, setVotes] = useState(defaultVotes || 0);
   const [showComment, setShowComment] = useState(false);
   const handleUpvote = async () => {
@@ -18,12 +18,16 @@ const Card = ({ card, onDelete }) => {
   const handleDelete = () => {
     onDelete(id);
   };
+
   return (
-    <div className="card">
+    <div className={`card ${pinned ? "pinned-card" : "card"}`}>
       <h3>{title}</h3>
       <p>{description}</p>
       <img src={gif} alt="GIF" />
       <div className="card-btns">
+        <button onClick={() => onPin(card.id)}>
+          {card.pinned ? "📌 Unpin" : "📍 Pin"}
+        </button>
         <button className="upvote-button" onClick={handleUpvote}>
           Upvote: {votes}
         </button>

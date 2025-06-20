@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import NewCardForm from "./NewCardForm";
 import Card from "./Card";
+// import "../style/BoardPage.css";
 const BoardPage = () => {
   const { boardId } = useParams();
   const [boardTitle, setBoardTitle] = useState("");
@@ -62,9 +63,14 @@ const BoardPage = () => {
       console.error("Invalid card data received:", newCard);
     }
   };
-
+  const handlePin = async (cardId) => {
+    await fetch(`http://localhost:3000/cards/pin/${cardId}`, {
+      method: "PATCH",
+    });
+    fetchCards(); // Refresh cards after pin toggle
+  };
   return (
-    <div>
+    <div className="card-list">
       <Link to="/">
         <span className="back-arrow"></span>
       </Link>
@@ -86,7 +92,7 @@ const BoardPage = () => {
       <div className="card-list">
         {cards.map((card) => (
           <div key={card.id} className="card-preview">
-            <Card card={card} onDelete={handleDelete} />
+            <Card card={card} onDelete={handleDelete} onPin={handlePin} />
           </div>
         ))}
       </div>
