@@ -1,8 +1,6 @@
 import "../style/Modal.css";
 import { useState } from "react";
 const Modal = ({ createBoard, onClose }) => {
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
-
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -20,7 +18,7 @@ const Modal = ({ createBoard, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${baseUrl}/boards`, {
+    fetch("https://kudos-board-vgqk.onrender.com/boards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
