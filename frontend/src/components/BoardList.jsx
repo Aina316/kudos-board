@@ -1,4 +1,5 @@
 import Board from "./Board";
+import "../App.css";
 const BoardList = ({ boards, onDelete }) => {
   console.log("4", boards);
   return (

@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import NewCardForm from "./NewCardForm";
 import Card from "./Card";
+import "../App.css";
 const BoardPage = () => {
   const { boardId } = useParams();
   const [boardTitle, setBoardTitle] = useState("");
@@ -64,10 +65,7 @@ const BoardPage = () => {
   };
 
   return (
-    <div>
-      <Link to="/">
-        <span className="back-arrow"></span>
-      </Link>
+    <div className="card-list">
       <Header />
       <h2> {boardTitle}</h2>
       <div className="center-create-button">
