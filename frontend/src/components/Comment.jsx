@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "../style/Comment.css";
+import "../App.css";
+
 const Comment = ({ card, onClose }) => {
   const [comments, setComments] = useState([]);
   const [message, setMessage] = useState("");
