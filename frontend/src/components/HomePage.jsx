@@ -12,7 +12,7 @@ function HomePage() {
   const [filter, setFilter] = useState({ category: "", type: "All" });
   const [searchInput, setSearchInput] = useState("");
   const [inputValue, setInputValue] = useState("");
-
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
   const filterBoards = () => {
     let filtered = [...boards];
     if (filter.type === "recent") {
@@ -35,7 +35,7 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await fetch("http://localhost:3000/boards");
+      const response = await fetch(`${baseUrl}/boards`);
       const data = await response.json();
       console.log("Data is here", data);
       setBoards(data);

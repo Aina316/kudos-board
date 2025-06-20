@@ -6,6 +6,7 @@ import Header from "./Header";
 import NewCardForm from "./NewCardForm";
 import Card from "./Card";
 const BoardPage = () => {
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
   const { boardId } = useParams();
   const [boardTitle, setBoardTitle] = useState("");
   const [cards, setCards] = useState([]);
@@ -18,9 +19,7 @@ const BoardPage = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/cards/${boardId}`
-      );
+      const response = await axios.get(`${baseUrl}/cards/${boardId}`);
       console.log("2025", response.data);
       setCards(response.data);
     } catch (error) {
@@ -30,9 +29,7 @@ const BoardPage = () => {
 
   const fetchBoardData = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/boards/${boardId}`
-      );
+      const response = await axios.get(`${baseUrl}/boards/${boardId}`);
       const title = response.data.title;
       setBoardTitle(title);
     } catch (error) {
@@ -43,7 +40,7 @@ const BoardPage = () => {
   const handleDelete = async (cardId) => {
     try {
       console.log("Deleting card with ID: ", cardId);
-      await axios.delete(`http://localhost:3000/cards/${cardId}`);
+      await axios.delete(`${baseUrl}/cards/${cardId}`);
       fetchCards();
     } catch (error) {
       console.error("Error deleting card:", error);
