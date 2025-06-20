@@ -11,7 +11,6 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
   const [selectedGifUrl, setSelectedGifUrl] = useState("");
 
   const apiKey = import.meta.env.VITE_GIPHY_API_KEY;
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
 
   const searchGifs = async () => {
     try {
@@ -47,12 +46,14 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
         alert("Please fill out all fields");
         return;
       }
-      const response = await axios.post(`${baseUrl}/cards/${boardId}`, {
-        title,
-        description,
-        gif: selectedGifUrl,
-      });
-
+      const response = await axios.post(
+        `http://localhost:3000/cards/${boardId}`,
+        {
+          title,
+          description,
+          gif: selectedGifUrl,
+        }
+      );
       const newCard = response.data;
 
       onSuccess(newCard);

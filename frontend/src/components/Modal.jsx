@@ -1,16 +1,30 @@
 import "../style/Modal.css";
 import { useState } from "react";
 const Modal = ({ createBoard, onClose }) => {
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
-
   const [formData, setFormData] = useState({
     title: "",
     category: "",
-    image: "",
+    author: "",
   });
+  const getRandomImage = () => {
+    const keywords = [
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+      "src/assets/images/background.jpeg",
+    ];
+    const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+    console.log("20200", keyword);
+    return keyword;
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -20,13 +34,15 @@ const Modal = ({ createBoard, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${baseUrl}/boards`, {
+    fetch("http://localhost:3000/boards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         ...formData,
+        image: getRandomImage(),
+
         createdAt: new Date().toISOString(),
       }),
     })
@@ -60,14 +76,7 @@ const Modal = ({ createBoard, onClose }) => {
           onChange={handleChange}
           required
         />
-        <label>Image</label>
-        <input
-          type="text"
-          name="image"
-          value={FormData.image}
-          onChange={handleChange}
-          required
-        />
+
         <label>Category</label>
         <select
           value={formData.category}

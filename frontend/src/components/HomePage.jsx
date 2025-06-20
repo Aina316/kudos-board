@@ -13,7 +13,6 @@ function HomePage() {
   const [filter, setFilter] = useState({ category: "", type: "All" });
   const [searchInput, setSearchInput] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const baseUrl = import.meta.env.VITE_API_URL;
   const filterBoards = () => {
     let filtered = [...boards];
     if (filter.type === "recent") {
@@ -36,9 +35,7 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await fetch(
-        "https://kudosboard-7fzn.onrender.com/boards"
-      );
+      const response = await fetch("http://localhost:3000/boards");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
