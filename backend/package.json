@@ -13,7 +13,7 @@
     "jiti": "^2.4.2"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "npx prisma migrate deploy && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
