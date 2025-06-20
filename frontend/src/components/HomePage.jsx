@@ -35,7 +35,9 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await fetch("http://localhost:3000/boards");
+      const response = await fetch(
+        "https://kudos-board-4f8j.onrender.com/boards"
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

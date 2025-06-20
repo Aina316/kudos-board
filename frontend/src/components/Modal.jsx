@@ -34,7 +34,7 @@ const Modal = ({ createBoard, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/boards", {
+    fetch("https://kudos-board-4f8j.onrender.com/boards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -20,7 +20,7 @@ const BoardPage = () => {
   const fetchCards = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/cards/${boardId}`
+        `https://kudos-board-4f8j.onrender.com/cards/${boardId}`
       );
       console.log("2025", response.data);
       setCards(response.data);
@@ -32,7 +32,7 @@ const BoardPage = () => {
   const fetchBoardData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/boards/${boardId}`
+        `https://kudos-board-4f8j.onrender.com/boards/${boardId}`
       );
       const title = response.data.title;
       setBoardTitle(title);
@@ -44,7 +44,9 @@ const BoardPage = () => {
   const handleDelete = async (cardId) => {
     try {
       console.log("Deleting card with ID: ", cardId);
-      await axios.delete(`http://localhost:3000/cards/${cardId}`);
+      await axios.delete(
+        `https://kudos-board-4f8j.onrender.com/cards/${cardId}`
+      );
       fetchCards();
     } catch (error) {
       console.error("Error deleting card:", error);
@@ -64,7 +66,7 @@ const BoardPage = () => {
     }
   };
   const handlePin = async (cardId) => {
-    await fetch(`http://localhost:3000/cards/pin/${cardId}`, {
+    await fetch(`https://kudos-board-4f8j.onrender.com/cards/pin/${cardId}`, {
       method: "PATCH",
     });
     fetchCards(); // Refresh cards after pin toggle

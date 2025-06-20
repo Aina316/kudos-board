@@ -1,9 +1,9 @@
 import "../App.css";
 import { Link } from "react-router-dom";
-
-const Board = ({ id, title, image, category, author, onDelete }) => {
+import image from "/src/assets/images/background.jpeg";
+const Board = ({ id, title, category, author, onDelete }) => {
   const deleteBoard = () => {
-    fetch(`http://localhost:3000/boards/${id}`, {
+    fetch(`https://kudos-board-4f8j.onrender.com/boards/${id}`, {
       method: "DELETE",
     }).then((res) => {
       if (!res.ok) throw new Error("Delete failed");

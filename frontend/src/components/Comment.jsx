@@ -6,7 +6,7 @@ const Comment = ({ card, onClose }) => {
   const [author, setAuthor] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/comments/card/${card.id}`)
+    fetch(`https://kudos-board-4f8j.onrender.com/comments/card/${card.id}`)
       .then((res) => res.json())
       .then(setComments);
   }, [card]);
@@ -15,16 +15,19 @@ const Comment = ({ card, onClose }) => {
     e.preventDefault();
     if (!message.trim()) return;
 
-    await fetch(`http://localhost:3000/comments/card/${card.id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, author }),
-    });
+    await fetch(
+      `https://kudos-board-4f8j.onrender.com/comments/card/${card.id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, author }),
+      }
+    );
 
     setMessage("");
     setAuthor("");
     const updated = await fetch(
-      `http://localhost:3000/comments/card/${card.id}`
+      `https://kudos-board-4f8j.onrender.com/comments/card/${card.id}`
     );
     setComments(await updated.json());
   };
