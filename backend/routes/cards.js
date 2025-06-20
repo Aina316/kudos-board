@@ -36,3 +36,21 @@ router.delete("/:cardId", async (req, res) => {
 });
 
 module.exports = router;
+
+router.patch("/:cardId/votes", async (req, res) => {
+  const cardId = parseInt(req.params.cardId);
+  try {
+    const updatedCard = await prisma.card.update({
+      where: { id: cardId },
+      data: {
+        votes: {
+          increment: 1,
+        },
+      },
+    });
+    res.json(updatedCard);
+  } catch (error) {
+    console.error("Error upvoting card: ", error);
+    res.status(500).json({ error: "Failed to upvote card" });
+  }
+});

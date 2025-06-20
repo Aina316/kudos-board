@@ -1,6 +1,7 @@
 const express = require("express");
+require("dotenv").config();
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const cardRoutes = require("./routes/cards");
 const boardRoutes = require("./routes/boards");
@@ -13,7 +14,7 @@ app.get("/", (req, res) => {
   res.send(`
     <html>
       <head>
-        <title>KUDOSBOARD</title>
+        <title>KUDOBOARD</title>
       </head>
       <body>
         <h1>Hello, Guys!</h1>
