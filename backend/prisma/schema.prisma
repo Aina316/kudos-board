@@ -33,8 +33,6 @@ gif      String
 votes   Int   @default(0)
 board  boards @relation(fields: [boardId], references: [id], onDelete: Cascade)
 boardId Int
-pinned Boolean @default(false)
-pinnedAt DateTime?
 createdAt DateTime @default(now())
 comments Comment[]
 }
