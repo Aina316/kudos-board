@@ -34,19 +34,17 @@ const SearchBox = ({
   return (
     <div className="search-filter">
       <div className="search-box">
-        <div className="input-form">
-          <input
-            type="text"
-            placeholder="Search Boards..."
-            className="search-bar"
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyPress}
-          />
-          <div className="search-box-button">
-            <button onClick={handleSearch}>Search</button>
-            <button onClick={handleClear}>Clear</button>
-          </div>
+        <input
+          type="text"
+          placeholder="Search Boards..."
+          className="search-bar"
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+        />
+        <div className="search-box-button">
+          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleClear}>Clear</button>
         </div>
       </div>
 

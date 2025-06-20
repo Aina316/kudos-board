@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../style/NewCardForm.css";
 import axios from "axios";
 const NewCardForm = ({ boardId, onSuccess, onClose }) => {
   const [title, setTitle] = useState("");
@@ -67,7 +68,7 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
   };
 
   return (
-    <div className="overlay">
+    <div className="card-overlay">
       <div className="new-card-form">
         <button className="close-btn" onClick={onClose}>
           X

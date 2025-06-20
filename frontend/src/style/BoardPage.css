@@ -1,0 +1,15 @@
+.card-list {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.center-create-button button {
+  background-color: #3f318e;
+  color: white;
+}

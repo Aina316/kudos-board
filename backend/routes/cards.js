@@ -7,6 +7,7 @@ router.get("/:boardId", async (req, res) => {
   const boardId = parseInt(req.params.boardId);
   const cards = await prisma.card.findMany({
     where: { boardId },
+    orderBy: { createdAt: "desc" },
   });
   res.json(cards);
 });
@@ -14,7 +15,6 @@ router.get("/:boardId", async (req, res) => {
 router.post("/:boardId", async (req, res) => {
   const { title, description, gif } = req.body;
   const boardId = parseInt(req.params.boardId);
-  const cards = await prisma.card.findMany();
 
   const card = await prisma.card.create({
     data: {

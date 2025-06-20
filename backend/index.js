@@ -5,10 +5,12 @@ const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const cardRoutes = require("./routes/cards");
 const boardRoutes = require("./routes/boards");
+const commentRoutes = require("./routes/comments");
 app.use(cors());
 app.use(express.json());
 app.use("/cards", cardRoutes);
 app.use("/boards", boardRoutes);
+app.use("/comments", commentRoutes);
 
 app.get("/", (req, res) => {
   res.send(`

@@ -31,7 +31,17 @@ title   String
 description String
 gif      String
 votes   Int   @default(0)
-board  boards @relation(fields: [boardId], references: [id])
+board  boards @relation(fields: [boardId], references: [id], onDelete: Cascade)
 boardId Int
+createdAt DateTime @default(now())
+comments Comment[]
 }
 
+model Comment{
+  id Int  @id @default(autoincrement())
+  message String
+  author String?
+  cardId Int
+  createdAt DateTime @default(now())
+  card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+}
