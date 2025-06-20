@@ -2,8 +2,10 @@ import "../App.css";
 import { Link } from "react-router-dom";
 
 const Board = ({ id, title, image, category, author, onDelete }) => {
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:9009";
+
   const deleteBoard = () => {
-    fetch(`https://kudos-board-vgqk.onrender.com/boards/${id}`, {
+    fetch(`${baseUrl}/boards/${id}`, {
       method: "DELETE",
     }).then((res) => {
       if (!res.ok) throw new Error("Delete failed");

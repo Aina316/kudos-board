@@ -46,14 +46,11 @@ const NewCardForm = ({ boardId, onSuccess, onClose }) => {
         alert("Please fill out all fields");
         return;
       }
-      const response = await axios.post(
-        `https://kudos-board-vgqk.onrender.com/cards/${boardId}`,
-        {
-          title,
-          description,
-          gif: selectedGifUrl,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/cards/${boardId}`, {
+        title,
+        description,
+        gif: selectedGifUrl,
+      });
 
       const newCard = response.data;
 
