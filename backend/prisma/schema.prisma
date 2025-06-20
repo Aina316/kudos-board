@@ -30,6 +30,7 @@ id        Int      @id @default(autoincrement())
 title   String
 description String
 gif      String
+votes   Int   @default(0)
 board  boards @relation(fields: [boardId], references: [id])
 boardId Int
 }
