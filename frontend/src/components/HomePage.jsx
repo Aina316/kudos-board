@@ -35,7 +35,9 @@ function HomePage() {
   };
   const fetchBoards = async () => {
     try {
-      const response = await fetch(`${baseUrl}/boards`);
+      const response = await fetch(
+        "https://kudos-board-vgqk.onrender.com/boards"
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
